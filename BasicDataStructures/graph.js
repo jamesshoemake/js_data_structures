@@ -48,12 +48,29 @@ class Graph {
     this.adjacentyList[vertex1].add(vertex2)
     this.adjacentyList[vertex2].add(vertex1)
   }
+
+  hasEdge(vertex1, vertex2) {
+    return (
+      this.adjacentyList[vertex1].has(vertex2) &&
+      this.adjacentyList[vertex2].has(vertex1)
+    )
+  }
+
+  display() {
+    for (let vertex in this.adjacentyList) {
+      console.log(vertex + " -> " + [...this.adjacentyList[vertex]])
+    }
+  }
 }
 
 const graph = new Graph()
-graph.addVertex('A')
-graph.addVertex('B')
-graph.addVertex('C')
+graph.addVertex("A")
+graph.addVertex("B")
+graph.addVertex("C")
 
-graph.addEdge('A', 'B')
-graph.addEdge('B', 'C')
+graph.addEdge("A", "B")
+graph.addEdge("B", "C")
+graph.display()
+
+console.log("A & B", graph.hasEdge("A", "B"))
+console.log("A & C", graph.hasEdge("A", "C"))
