@@ -49,6 +49,23 @@ class Graph {
     this.adjacentyList[vertex2].add(vertex1)
   }
 
+  removeEdge(vertex1, vertex2) {
+    // using built in method on JS datastructure
+    this.adjacentyList[vertex1].delete(vertex2)
+    this.adjacentyList[vertex2].delete(vertex1)
+  }
+
+  // T:O(n)
+  removeVertex(vertex) {
+    if (!this.adjacentyList[vertex]) return
+
+    for (let adjVertex of this.adjacentyList[vertex]) {
+      this.removeEdge(vertex, adjVertex)
+    }
+
+    delete this.adjacentyList[vertex]
+  }
+
   hasEdge(vertex1, vertex2) {
     return (
       this.adjacentyList[vertex1].has(vertex2) &&
@@ -74,3 +91,6 @@ graph.display()
 
 console.log("A & B", graph.hasEdge("A", "B"))
 console.log("A & C", graph.hasEdge("A", "C"))
+
+graph.removeVertex("B")
+graph.display()
